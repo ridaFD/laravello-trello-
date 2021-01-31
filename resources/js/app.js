@@ -3,6 +3,7 @@ import Board from "./Board";
 import './bootstrap';
 import apolloProvider from './apollo.config';
 
+
 window.Vue = Vue;
 
 
