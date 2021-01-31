@@ -1,10 +1,12 @@
-require('./bootstrap');
+import './bootstrap';
+import Vue from 'vue';
+import Board from "./Board";
 
-window.Vue = require('vue').default;
+window.Vue = Vue;
 
 
 
-Vue.component('Board', require('./Board.vue').default);
+Vue.component('Board', Board);
 
 
 
