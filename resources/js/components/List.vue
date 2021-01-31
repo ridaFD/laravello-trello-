@@ -4,22 +4,30 @@
       <div class="text-gray-800 pl-2 font-bold">{{ list.title }}</div>
     </div>
 
-    <Card :card="card" v-for="card in list.cards" :key="card.id"></Card>
+    <Card v-for="card in list.cards" :key="card.id" :card="card"></Card>
 
-    <CardAddButton></CardAddButton>
+    <CardEditor v-if="editing" @closed="editing = false"></CardEditor>
+    <CardAddButton v-else @click="editing = true"></CardAddButton>
+
   </div>
 </template>
 
 <script>
 import Card from "./Card";
 import CardAddButton from "./CardAddButton";
+import CardEditor from "./CardEditor";
 
 export default {
   name: "List",
-  components: {Card, CardAddButton},
+  components: {Card, CardAddButton, CardEditor},
   props: {
     list: {
       type: Object
+    }
+  },
+  data() {
+    return {
+      editing: false
     }
   }
 }
