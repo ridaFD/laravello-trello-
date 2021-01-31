@@ -41,6 +41,7 @@ type CardList {
     title: String!
     created_at: DateTime!
     updated_at: DateTime!
+    board_id: ID!
 }
 
 type Card {
