@@ -10,7 +10,9 @@ class Card extends Model
 {
     use HasFactory;
 
-    public function lists(): BelongsTo
+    protected $fillable = ['title', 'order', 'list_id', 'owner_id'];
+
+    public function list(): BelongsTo
     {
         return $this->belongsTo(CardList::class, 'list_id');
     }

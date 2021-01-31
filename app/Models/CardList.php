@@ -11,6 +11,8 @@ class CardList extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'board_id'];
+
     public function board(): BelongsTo
     {
         return $this->belongsTo(Board::class);

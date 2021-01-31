@@ -11,6 +11,8 @@ class Board extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'color', 'owner_id'];
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
