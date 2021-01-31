@@ -44,11 +44,11 @@ class User extends Authenticatable
 
     public function boards(): HasMany
     {
-        return $this->hasMany(Board::class);
+        return $this->hasMany(Board::class, 'owner_id');
     }
 
     public function cards(): HasMany
     {
-        return $this->hasMany(Card::class);
+        return $this->hasMany(Card::class, 'owner_id');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\Board;
 use App\Models\Card;
 use App\Models\CardList;
@@ -53,15 +54,16 @@ class DatabaseSeeder extends Seeder
                     'Paint a picture',
                     'Create a course'
                 ])->random(random_int(2, 5))
-                    ->each(function ($task) use ($board, $list, $order) {
+                    ->each(function ($task) use ($board, $list, &$order) {
                         Card::make([
                             'title' => $task,
                             'owner_id' => $board->owner_id,
                             'list_id' => $list->id,
                             'order' => $order++
                         ])->save();
-                });
+                    });
             });
         });
+
     }
 }
