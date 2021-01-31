@@ -7572,6 +7572,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_List__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/List */ "./resources/js/components/List.vue");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_1__);
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n        query($id: ID!) {\n          board(id: $id) {\n            title\n            color\n            lists {\n              id\n              title\n              cards {\n                id\n                title\n                order\n              }\n            }\n          }\n        }"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 //
 //
 //
@@ -7593,10 +7607,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Board",
   components: {
-    List: _components_List__WEBPACK_IMPORTED_MODULE_0__.default
+    List: _components_List__WEBPACK_IMPORTED_MODULE_0__.default,
+    gql: (graphql_tag__WEBPACK_IMPORTED_MODULE_1___default())
+  },
+  apollo: {
+    board: {
+      query: graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject()),
+      variables: {
+        id: 1
+      }
+    }
   }
 });
 
@@ -7618,7 +7642,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Card"
+  name: "Card",
+  props: {
+    card: Object
+  }
 });
 
 /***/ }),
@@ -7669,9 +7696,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7679,6 +7703,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Card: _Card__WEBPACK_IMPORTED_MODULE_0__.default,
     CardAddButton: _CardAddButton__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  props: {
+    list: {
+      type: Object
+    }
   }
 });
 
@@ -33567,23 +33596,21 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "h-full flex flex-col items-stretch flex-1" }, [
         _c("div", { staticClass: "mx-4 mb-2 text-white font-bold text-lg" }, [
-          _vm._v("The board title here")
+          _vm.$apollo.queries.board.loading
+            ? _c("span", [_vm._v("Loading...")])
+            : _c("span", [_vm._v(_vm._s(_vm.board.title))])
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "flex flex-1 items-start overflow-x-auto mx-2" },
-          [
-            _c("List"),
-            _vm._v(" "),
-            _c("List"),
-            _vm._v(" "),
-            _c("List"),
-            _vm._v(" "),
-            _c("List")
-          ],
-          1
-        )
+        _vm.board
+          ? _c(
+              "div",
+              { staticClass: "flex flex-1 items-start overflow-x-auto mx-2" },
+              _vm._l(_vm.board.lists, function(list) {
+                return _c("List", { key: list.id, attrs: { list: list } })
+              }),
+              1
+            )
+          : _vm._e()
       ])
     ]
   )
@@ -33600,7 +33627,7 @@ var staticRenderFns = [
           "header text-white flex justify-between items-center mb-2 bg-purple-600"
       },
       [
-        _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("df")]),
+        _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
         _vm._v(" "),
         _c(
           "div",
@@ -33608,9 +33635,7 @@ var staticRenderFns = [
           [_vm._v("Laravello")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
-          _vm._v("sdsd")
-        ])
+        _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [_vm._v("x")])
       ]
     )
   }
@@ -33643,7 +33668,7 @@ var render = function() {
       staticClass:
         "bg-white rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2 card"
     },
-    [_vm._v("xxx")]
+    [_vm._v(_vm._s(_vm.card.title))]
   )
 }
 var staticRenderFns = []
@@ -33705,33 +33730,22 @@ var render = function() {
     "div",
     { staticClass: "bg-gray-300 rounded-sm p-2 mr-2 list" },
     [
-      _vm._m(0),
+      _c("div", { staticClass: "flex justify-between" }, [
+        _c("div", { staticClass: "text-gray-800 pl-2 font-bold" }, [
+          _vm._v(_vm._s(_vm.list.title))
+        ])
+      ]),
       _vm._v(" "),
-      _c("Card"),
-      _vm._v(" "),
-      _c("Card"),
-      _vm._v(" "),
-      _c("Card"),
-      _vm._v(" "),
-      _c("Card"),
+      _vm._l(_vm.list.cards, function(card) {
+        return _c("Card", { key: card.id, attrs: { card: card } })
+      }),
       _vm._v(" "),
       _c("CardAddButton")
     ],
-    1
+    2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-between" }, [
-      _c("div", { staticClass: "text-gray-800 pl-2 font-bold" }, [
-        _vm._v("List title")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
