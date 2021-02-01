@@ -7,16 +7,28 @@
         class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500"
     >
       <div class="text-gray-400 pr-2 hover:text-yellow-700">E</div>
-      <div class="text-gray-400 hover:text-red-700">D</div>
+      <div class="text-gray-400 hover:text-red-700" @click="cardDelete">D</div>
     </div>
   </div>
 </template>
 
 <script>
+import CardDelete from './../graphql/cardDelete.gql';
+
 export default {
   name: "Card",
   props: {
     card: Object
+  },
+  methods: {
+    cardDelete() {
+      this.$apollo.mutate({
+        mutation: CardDelete,
+        variables: {
+          id: this.card.id
+        }
+      })
+    }
   }
 }
 </script>
