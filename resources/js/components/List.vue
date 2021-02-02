@@ -16,6 +16,7 @@
         :list="list"
         @added="$emit('card-added', {...$event, listId: list.id})"
         @closed="editing = false"
+        @updated="$emit('card-updated', {...$event, listId:  list.id})"
     ></CardAddEditor>
     <CardAddButton v-else @click="editing = true"></CardAddButton>
 
