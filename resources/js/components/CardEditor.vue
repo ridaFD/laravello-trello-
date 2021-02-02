@@ -26,7 +26,8 @@
 
 <script>
 import CardAdd from "../graphql/CardAdd.gql";
-import BoardQuery from "../graphql/BoardWithListsAndCards.gql";
+// import BoardQuery from "../graphql/BoardWithListsAndCards.gql";
+import { EVENT_CARD_ADDED } from "../constants";
 
 
 export default {
@@ -54,8 +55,12 @@ export default {
           order: this.list.cards.length + 1
         },
         update(store, { data: { cardAdd } }) {
-          self.$emit("added", { store, data: cardAdd });
-          self.$emit('closed');
+          self.$emit("added", {
+            store,
+            data: cardAdd,
+            type: EVENT_CARD_ADDED
+          });
+          self.closed();
         }
       })
     },
