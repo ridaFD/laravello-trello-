@@ -8225,7 +8225,7 @@ var routes = [{
   name: 'login',
   component: _Login__WEBPACK_IMPORTED_MODULE_1__.default
 }, {
-  path: 'register',
+  path: '/register',
   name: "register",
   component: _Register_vue__WEBPACK_IMPORTED_MODULE_2__.default
 }];
