@@ -12,7 +12,7 @@
 </head>
 <body class="h-screen text-gray-800">
     <div id="app">
-        <Board></Board>
+        <router-view></router-view>
     </div>
 </body>
 </html>
